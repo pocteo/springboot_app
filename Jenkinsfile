@@ -15,6 +15,11 @@ pipeline {
       steps {
         sh 'mvn package'
       }
+    }
+    stage('run the packages') {
+      steps {
+        sh 'java -jar target/spring-boot-rest-example-0.5.0.jar'
+      }
     } 
   }
 }
