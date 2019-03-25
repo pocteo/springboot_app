@@ -121,6 +121,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
+					<forkCount>0</forkCount>
+        				<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
