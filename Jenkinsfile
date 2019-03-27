@@ -80,12 +80,7 @@ pipeline {
       steps {
         sh 'rm -rf springboot_app.jar '
 	sh 'curl -u admin:admin123 -o springboot_app.jar  "http://localhost:8081/#browse/browse:springboot_app_snapshots:com%2Fpocteo%2Fspringboot_app%2F1.0.0-SNAPSHOT%2F1.0.0-20190326.113828-1%2Fspringboot_app-1.0.0-20190326.113828-1.jar" -L '
-        
-	sh 'usermod -aG docker jenkins'
-	sh 'chmod 664 /var/run/docker.sock'
-	sh 'service jenkins restart'
-	sh 'su jenkins'
-	sh 'docker build -t springboot_app .'
+        sh 'docker build -t springboot_app .'
       }
    } 
 
