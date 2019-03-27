@@ -17,7 +17,7 @@ pipeline {
     
   stages {
   
-    stage('clean the packages') {
+   stage('clean the packages') {
       steps {
         sh 'mvn clean'
       }
@@ -27,13 +27,13 @@ pipeline {
         sh 'mvn package'
       }
     }
-    stage('unit test') {
+   stage('unit test') {
       steps {
         sh 'mvn test'
       }
     } 
   
-  stage("publish to nexus") {
+   stage("publish to nexus") {
             steps {
                 script {
                     // Read POM xml file using 'readMavenPom' step , this step 'readMavenPom' is included in: https://plugins.jenkins.io/
@@ -74,14 +74,20 @@ pipeline {
                     }
                 }
             }
-        }
-    }
+   }
+    
+   stage('build dockerfile') {
+      steps {
+        sh 'curl -u admin:admin123 -o springboot_app.jar  "http://localhost:8081/#browse/browse:springboot_app_snapshots:com%2Fpocteo%2Fspringboot_app%2F1.0.0-SNAPSHOT%2F1.0.0-20190326.113828-1%2Fspringboot_app-1.0.0-20190326.113828-1.jar" -L '
+        sh 'docker build -t springboot_app .'
+      }
+   } 
+
+
+
+
+  }
 }
-
-
-
-
-
 
 
 
